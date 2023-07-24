@@ -1,8 +1,17 @@
 pipeline {
     agent any
 
+    sh 'printenv'
+    environment {
+        IRONIC_NUM = 0.0
+    }
     stages {
         stage('Build') {
+            when {
+                expression {
+                    BRANCH_NAME == 'hotfix_*' && 
+                }
+            }   
             steps {
                 echo 'Building...'
                 // Add your build steps here
@@ -25,6 +34,9 @@ pipeline {
     }
 
     post {
+        always {
+
+        }
         success {
             echo 'Pipeline completed successfully!'
         }
